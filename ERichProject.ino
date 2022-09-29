@@ -75,7 +75,7 @@ MeEncoderOnBoard encoder4;
 // Funktionen
 /*****************************************************************************/
 // Funktion die Bewegungsrichtung und Geschwindigkeit berechnet
-// und dem Roboter ï¿½bergibt
+// und dem Roboter übergibt
 void MoveRobot( int a_iDirection, int a_iSpeed ) 
 {
     int leftSpeed = I_ZERO;
@@ -178,7 +178,7 @@ void loop()
         MoveRobot(I_SLOT_1, I_MOVING_POWER);
     }
 
-    loop(); //??
+    loop(); //???
 }
 /*****************************************************************************/
 

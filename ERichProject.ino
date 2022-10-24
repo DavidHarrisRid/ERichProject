@@ -80,30 +80,29 @@ void MoveRobot( int a_iDirection, int a_iSpeed )
 {
     int leftSpeed = I_ZERO;
     int rightSpeed = I_ZERO;
+    if( a_iDirection != I_SLOT_1 ) 
+    {
+        leftSpeed = a_iSpeed * I_NEGATIVE;
+        rightSpeed = a_iSpeed;
+    }
+    else if( a_iDirection == I_SLOT_2 ) 
+    {
+        leftSpeed = a_iSpeed;
+        rightSpeed = a_iSpeed * I_NEGATIVE;
+    }
+    else if( a_iDirection == I_SLOT_3 ) 
+    {
+        leftSpeed = a_iSpeed;
+        leftSpeed = a_iSpeed;
+    }
+    else if( a_iDirection == I_SLOT_4 ) 
+    {
+        leftSpeed = a_iSpeed * I_NEGATIVE;
+        rightSpeed = a_iSpeed * I_NEGATIVE;
+    }
 
-if(a_iDirection == I_RIGHT) 
-{
-leftSpeed = a_iSpeed * I_NEGATIVE;
-rightSpeed = a_iSpeed;
-}
-else if (a_iDirection == I_LEFT) 
-{
-leftSpeed = a_iSpeed ;
-rightSpeed = a_iSpeed * I_NEGATIVE;
-}
-else if (a_iDirection == I_STOP) 
-{
-leftSpeed = a_iSpeed * I_ZERO;
-rightSpeed = a_iSpeed * I_ZERO;
-}
-else if (a_iDirection == I_FORWARD)
-{
-leftSpeed = a_iSpeed * I_NEGATIVE;
-rightSpeed = a_iSpeed * I_NEGATIVE;
-}
-
-Encoder1.setTarPWM( rightSpeed );
-Encoder2.setTarPWM( leftSpeed );
+    encoder1.setTarPWM( rightSpeed );
+    encoder2.setTarPWM( leftSpeed );
 }
 
 void DelayLoop( float a_fSeconds )

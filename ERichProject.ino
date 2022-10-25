@@ -75,7 +75,7 @@ MeEncoderOnBoard encoder4;
 // Funktionen
 /*****************************************************************************/
 // Funktion die Bewegungsrichtung und Geschwindigkeit berechnet
-// und dem Roboter übergibt
+// und dem Roboter ï¿½bergibt
 void MoveRobot( int a_iDirection, int a_iSpeed ) 
 {
     int leftSpeed = I_ZERO;
@@ -150,36 +150,49 @@ void OnEncoder1ReaderProc( void )
 }
 /*****************************************************************************/
 
-
 /*****************************************************************************/
-// Arduino-Loop
+// Setup:
+/*****************************************************************************/
+// Sets Parameters and Connections one time when Arduino is startet or reset
 /*****************************************************************************/
 
-// the setup function runs once when you press reset or power the board
-setup() 
+void setup ()
 {
+  attachInterrupt(encoder1.getIntNum(), OnEncoder1ReadProc, RISING);
+  attachInterrupt(encoder2.getIntNum(), OnEncoder2ReadProc, RISING);
 
-    attachInterrupt(encoder1.getIntNum(), OnEncoder1ReadProc, RISING);
-    attachInterrupt(encoder1.getIntNum(), OnEncoder2ReaderProc, RISING);
-    TCCR1A = _BV(WGM10);
-    TCCR1B = _BV(CS11) | _BV(WGM12);
-    TCCR2A = _BV(WGM21) | _BV(WGM20);
-    TCCR2B = _BV(CS21);
-
+  TCCR1A = _BV(WGM10);
+  TCCR1B = _BV(CS11) | _BV(WGM12);
+  TCCR2A = _BV(WGM21) | _BV(WGM20);
+  TCCR2B = _BV(CS21);
 }
 
-
-// the loop function runs over and over again until power down or reset
-void loop()
-{
-    //???
-    if( lineFollower8.readSensors() == I_ZERO_OUTPUT ) 
-    {
-        MoveRobot(I_SLOT_1, I_MOVING_POWER);
-    }
-
-    loop(); //???
-}
+/*****************************************************************************/
+//Loop:
+/*****************************************************************************/
+//Repeats as long the Arduino is running
+//Output behaviour to Motors in correlation to the Sensor Input ist controlled
 /*****************************************************************************/
 
+void loop ()
+{
+  if( lineFollower8.readSensors() == I_ZERO_OUTPUT )
+  {
+    MoveRobot(I_STOP, I_ZERO_POWER)
+  }
+  if (lineFollower8.readSensors() == I_DOUBLE_OUTPUT)
+  {
+    MoveRobot(I_FOWARD, I_MOVING_POWER)
+  }
+  if (lineFollower8.readSensors() == I_LEFT_OUTPUT)
+  {
+    MoveRobot(I_LEFT, I_MOVING_POWER)
+  }
+  if (lineFollower8.readSensors() == I_RIGHT_OUTPUT)
+  {
+    MoveRobot (I_RIGHT, I_MOVING_POWER)
+  }
+  _loop();
+}
+/*****************************************************************************/
 /*****************************************************************************/

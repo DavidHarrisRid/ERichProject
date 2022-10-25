@@ -80,45 +80,46 @@ void MoveRobot( int a_iDirection, int a_iSpeed )
 {
     int leftSpeed = I_ZERO;
     int rightSpeed = I_ZERO;
-    if( a_iDirection != I_SLOT_1 ) 
-    {
-        leftSpeed = a_iSpeed * I_NEGATIVE;
-        rightSpeed = a_iSpeed;
-    }
-    else if( a_iDirection == I_SLOT_2 ) 
-    {
-        leftSpeed = a_iSpeed;
-        rightSpeed = a_iSpeed * I_NEGATIVE;
-    }
-    else if( a_iDirection == I_SLOT_3 ) 
-    {
-        leftSpeed = a_iSpeed;
-        leftSpeed = a_iSpeed;
-    }
-    else if( a_iDirection == I_SLOT_4 ) 
-    {
-        leftSpeed = a_iSpeed * I_NEGATIVE;
-        rightSpeed = a_iSpeed * I_NEGATIVE;
-    }
 
-    encoder1.setTarPWM( rightSpeed );
-    encoder2.setTarPWM( leftSpeed );
+if(a_iDirection == I_RIGHT) 
+{
+leftSpeed = a_iSpeed * I_NEGATIVE;
+rightSpeed = a_iSpeed;
+}
+else if (a_iDirection == I_LEFT) 
+{
+leftSpeed = a_iSpeed ;
+rightSpeed = a_iSpeed * I_NEGATIVE;
+}
+else if (a_iDirection == I_STOP) 
+{
+leftSpeed = a_iSpeed * I_ZERO;
+rightSpeed = a_iSpeed * I_ZERO;
+}
+else if (a_iDirection == I_FORWARD)
+{
+leftSpeed = a_iSpeed * I_NEGATIVE;
+rightSpeed = a_iSpeed * I_NEGATIVE;
+}
+
+Encoder1.setTarPWM( rightSpeed );
+Encoder2.setTarPWM( leftSpeed );
 }
 
 void DelayLoop( float a_fSeconds )
     //if-Schleife
-    if (a_fSeconds < F_NULL) a_fSeconds = F_NULL;
+    if (a_fSeconds < F_NULL)
     {
-    
+      a_fSeconds = F_NULL;
     }
     long endTime = millis() + a_fSeconds * F_MILLIS;
-    while (millis() == true) loop();
+    while (millis() == endTime) loop();
 
 
 void loop( void )
 {
-    encoder1.loop():
-    encoder2.loop();
+    Encoder1.loop();
+    Encoder2.loop();
 }
 
 
@@ -127,25 +128,25 @@ void loop( void )
 /*****************************************************************************/
 void OnEncoder1ReadProc( void )
 {
-    if( digitalRead( encoder1.getPortB() ) == I_ZERO )
+    if( digitalRead( Encoder1.getPortB() ) == I_ZERO )
     {
-        encoder1.pulsePosMinus();
+        Encoder1.pulsePosMinus();
     }
     else
     {
-        encoder1.pulsePosPlus();
+        Encoder1.pulsePosPlus();
     }
 }
 
-void OnEncoder1ReaderProc( void )
+void OnEncoder2ReadProc( void )
 {
-    if ( digitalRead( encoder2.getPortB() ) == I_ZERO )
+    if ( digitalRead( Encoder2.getPortB() ) == I_ZERO )
     {
-        encoder2.pulsePosMinus();
+        Encoder2.pulsePosMinus();
     }
     else
     {
-        encoder2.pulsePosPlus();
+        Encoder2.pulsePosPlus();
     }
 }
 /*****************************************************************************/

@@ -17,31 +17,36 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <SoftwareSerial.h>
-
+#include <MeMegaPi.h>
 
 /*****************************************************************************/
 // Konstanten
 /*****************************************************************************/
-const int I_ZERO = 0;
+const int I_ZERO     = 0;
 const int I_NEGATIVE = -1;
 
-const float F_NULL = 0.0f;
+const float F_NULL   = 0.0f;
 const float F_MILLIS = 1000.0f;
 
+const int I_FORWARD = 0;
+const int I_STOP    = 3;
+const int I_LEFT    = 1;
+const int I_RIGHT   = 2;
+
 // Maths
-const int F_PI = 3.141592653589793;
-const double F_ANGLE = 180.0;
-const double F_ANGLE_RAD = F_PI / F_ANGLE;
-const double F_ANGLE_DEG = F_ANGLE / F_PI;
+const double D_PI        = 3.141592653589793;
+const double D_ANGLE     = 180.0;
+const double D_ANGLE_RAD = F_PI / F_ANGLE;
+const double D_ANGLE_DEG = F_ANGLE / F_PI;
 
 // Line Follower
-const uint8_t I_FOLLOWER_PORT = 8;
+uint8_t I_FOLLOWER_PORT = 8;
 
 // Encoder Board
-bool I_SLOT_1 = 1;
+int I_SLOT_1 = 1;
 int I_SLOT_2 = 2;
 int I_SLOT_3 = 3;
-const int I_SLOT_4 = 4;
+int I_SLOT_4 = 4;
 
 // Moving Power
 const int I_MOVING_POWER = 50 / 100.0 * 255;

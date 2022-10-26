@@ -36,8 +36,8 @@ const int I_RIGHT   = 2;
 // Maths
 const double D_PI        = 3.141592653589793;
 const double D_ANGLE     = 180.0;
-const double D_ANGLE_RAD = F_PI / F_ANGLE;
-const double D_ANGLE_DEG = F_ANGLE / F_PI;
+const double D_ANGLE_RAD = D_PI / D_ANGLE;
+const double D_ANGLE_DEG = D_ANGLE / D_PI;
 
 // Line Follower
 uint8_t I_FOLLOWER_PORT = 8;

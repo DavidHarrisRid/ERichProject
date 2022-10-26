@@ -18,8 +18,9 @@
 #include <Wire.h>
 #include <SoftwareSerial.h>
 #include <MeMegaPi.h>
-#include <cstdint>
-#include "Makeblock.h"
+//Für Visual Studio benötigt
+//#include <cstdint>
+//#include "Makeblock.h"
 
 /*****************************************************************************/
 // Konstanten
@@ -42,7 +43,7 @@ const double D_ANGLE_RAD = D_PI / D_ANGLE;
 const double D_ANGLE_DEG = D_ANGLE / D_PI;
 
 // Line Follower
-uint8_t I_FOLLOWER_PORT = 8;
+const uint8_t I_FOLLOWER_PORT = 8;
 
 // Encoder Board
 int I_SLOT_1 = 1;
@@ -69,7 +70,7 @@ const uint8_t I_DOUBLE_OUTPUT = 0;
 /*****************************************************************************/
 // Methoden
 /*****************************************************************************/
-MeLineFollower lineFollower8(uint8_t I_FOLLOWER_PORT); 
+MeLineFollower lineFollower8( I_FOLLOWER_PORT ); 
 
 MeEncoderOnBoard Encoder1(I_SLOT_1); 
 MeEncoderOnBoard Encoder2(I_SLOT_2);
@@ -113,6 +114,7 @@ Encoder2.setTarPWM( leftSpeed );
 }
 
 void DelayLoop( float a_fSeconds )
+{
     //if-Schleife
     if (a_fSeconds < F_NULL)
     {
@@ -121,8 +123,8 @@ void DelayLoop( float a_fSeconds )
     long endTime = millis() + a_fSeconds * F_MILLIS;
     while (millis() == endTime) loop();
 
-
-void loop( void )
+}
+void _loop( void )
 {
     Encoder1.loop();
     Encoder2.loop();
@@ -165,8 +167,8 @@ void OnEncoder2ReadProc( void )
 
 void setup ()
 {
-  attachInterrupt(encoder1.getIntNum(), OnEncoder1ReadProc, RISING);
-  attachInterrupt(encoder2.getIntNum(), OnEncoder2ReadProc, RISING);
+  attachInterrupt(Encoder1.getIntNum(), OnEncoder1ReadProc, RISING);
+  attachInterrupt(Encoder2.getIntNum(), OnEncoder2ReadProc, RISING);
 
   TCCR1A = _BV(WGM10);
   TCCR1B = _BV(CS11) | _BV(WGM12);
@@ -185,19 +187,19 @@ void loop ()
 {
   if( lineFollower8.readSensors() == I_ZERO_OUTPUT )
   {
-    MoveRobot(I_STOP, I_ZERO_POWER)
+    MoveRobot(I_STOP, I_ZERO_POWER);
   }
   if (lineFollower8.readSensors() == I_DOUBLE_OUTPUT)
   {
-    MoveRobot(I_FOWARD, I_MOVING_POWER)
+    MoveRobot(I_FORWARD, I_MOVING_POWER);
   }
   if (lineFollower8.readSensors() == I_LEFT_OUTPUT)
   {
-    MoveRobot(I_LEFT, I_MOVING_POWER)
+    MoveRobot(I_LEFT, I_MOVING_POWER);
   }
   if (lineFollower8.readSensors() == I_RIGHT_OUTPUT)
   {
-    MoveRobot (I_RIGHT, I_MOVING_POWER)
+    MoveRobot (I_RIGHT, I_MOVING_POWER);
   }
   _loop();
 }

@@ -18,6 +18,8 @@
 #include <Wire.h>
 #include <SoftwareSerial.h>
 #include <MeMegaPi.h>
+#include <cstdint>
+#include "Makeblock.h"
 
 /*****************************************************************************/
 // Konstanten
@@ -53,12 +55,13 @@ const int I_MOVING_POWER = 50 / 100.0 * 255;
 const int I_ZERO_POWER = 0 / 100.0 * 255;
 
 // Delay
-const int I_ONE_SEC = 1;
+const int I_ONE_SEC = 1000; 
 
 // Sensor Output
-const uint8_t I_ZERO_OUTPUT = -1;
-const uint8_t I_FULL_OUTPUT = 1;
-const uint8_t I_DOUBLE_OUTPUT = 2;
+const uint8_t I_ZERO_OUTPUT = 3;
+const uint8_t I_LEFT_OUTPUT = 1;     
+const uint8_t I_RIGHT_OUTPUT = 2;    
+const uint8_t I_DOUBLE_OUTPUT = 0;
 /*****************************************************************************/
 
 
@@ -66,15 +69,13 @@ const uint8_t I_DOUBLE_OUTPUT = 2;
 /*****************************************************************************/
 // Methoden
 /*****************************************************************************/
-MeLineFollower lineFollower8( I_FOLLOWER_PORT );
+MeLineFollower lineFollower8(uint8_t I_FOLLOWER_PORT); 
 
-MeEncoderOnBoard Encoder1( I_SLOT_1 );
-MeEncoderOnBoard encoder2( I_SLOT_2 );
-MeEncoderOnBoard encoder3( I_SLOT_3 );
-MeEncoderOnBoard encoder4;
+MeEncoderOnBoard Encoder1(I_SLOT_1); 
+MeEncoderOnBoard Encoder2(I_SLOT_2);
+MeEncoderOnBoard Encoder3(I_SLOT_3);
+MeEncoderOnBoard Encoder4(I_SLOT_4); 
 /*****************************************************************************/
-
-
 
 /*****************************************************************************/
 // Funktionen

@@ -69,7 +69,8 @@ int I_SLOT_4 = 4;
 // Moving Power
 /*****************************************************************************/
 
-const int I_MOVING_POWER = 50 / 100.0 * 255;
+const int I_MOVING_POWER_RIGHT = 50 / 100.0 * 255;
+const int I_MOVING_POWER_LEFT = 30 / 100.0 * 255;
 const int I_ZERO_POWER = 0 / 100.0 * 255;
 
 
@@ -107,33 +108,33 @@ MeEncoderOnBoard Encoder4(I_SLOT_4);
 // Funktion die Bewegungsrichtung und Geschwindigkeit berechnet
 // und dem Roboter �bergibt
 
-void MoveRobot( int a_iDirection, int a_iSpeed ) 
+void MoveRobot( int a_iDirection, int a_iSpeedRight, int a_iSpeedLeft ) 
 {
   int leftSpeed   = I_ZERO;
   int rightSpeed  = I_ZERO;
 
   if( a_iDirection == I_RIGHT ) 
   {
-    leftSpeed   = a_iSpeed * I_NEGATIVE;
-    rightSpeed  = a_iSpeed;
+    leftSpeed   = a_iSpeedLeft * I_NEGATIVE;
+    rightSpeed  = a_iSpeedRight;
   }
 
   else if ( a_iDirection == I_LEFT ) 
   {
-    leftSpeed   = a_iSpeed ;
-    rightSpeed  = a_iSpeed * I_NEGATIVE;
+    leftSpeed   = a_iSpeedLeft;
+    rightSpeed  = a_iSpeedRight * I_NEGATIVE;
   }
 
   else if ( a_iDirection == I_STOP ) 
   {
-    leftSpeed   = a_iSpeed * I_ZERO;
-    rightSpeed  = a_iSpeed * I_ZERO;
+    leftSpeed   = a_iSpeedLeft* I_ZERO;
+    rightSpeed  = a_iSpeedRight * I_ZERO;
   }
 
   else if ( a_iDirection == I_FORWARD )
   {
-    leftSpeed   = a_iSpeed * I_NEGATIVE;
-    rightSpeed  = a_iSpeed * I_NEGATIVE;
+    leftSpeed   = a_iSpeedLeft * I_NEGATIVE;
+    rightSpeed  = a_iSpeedRight * I_NEGATIVE;
   }
 
   Encoder1.setTarPWM( rightSpeed );
@@ -214,19 +215,19 @@ void loop ()
 {
   if( lineFollower8.readSensors() == I_ZERO_OUTPUT )
   {
-    MoveRobot( I_STOP, I_ZERO_POWER );
+    MoveRobot( I_STOP, I_ZERO_POWER, I_ZERO_POWER );
   }
   if ( lineFollower8.readSensors() == I_DOUBLE_OUTPUT )
   {
-    MoveRobot( I_FORWARD, I_MOVING_POWER );
+    MoveRobot( I_FORWARD, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
   }
   if ( lineFollower8.readSensors() == I_LEFT_OUTPUT )
   {
-    MoveRobot( I_LEFT, I_MOVING_POWER );
+    MoveRobot( I_LEFT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
   }
   if ( lineFollower8.readSensors() == I_RIGHT_OUTPUT )
   {
-    MoveRobot ( I_RIGHT, I_MOVING_POWER );
+    MoveRobot ( I_RIGHT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
   }
   _loop();
 }

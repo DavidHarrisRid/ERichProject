@@ -56,14 +56,18 @@ const uint8_t I_FOLLOWER_PORT = 8;
 
 
 /*****************************************************************************/
+// Distance Sensor
+/*****************************************************************************/
+cont uint8_t I_DISTANCE_PORT = 7;
+
+/*****************************************************************************/
 // Encoder Board
 /*****************************************************************************/
 
-int I_SLOT_1 = 1;
-int I_SLOT_2 = 2;
-int I_SLOT_3 = 3;
-int I_SLOT_4 = 4;
-
+int I_PORT_1 = 1;
+int I_PORT_2 = 2;
+int I_PORT_3 = 3;
+int I_PORT_4 = 4;
 
 /*****************************************************************************/
 // Moving Power
@@ -96,11 +100,12 @@ const uint8_t I_DOUBLE_OUTPUT = 0;
 // Methoden
 /*****************************************************************************/
 MeLineFollower lineFollower8( I_FOLLOWER_PORT ); 
+MeUltrasonicSensor ultrasonic_7( I_DISTANCE_PORT );
 
-MeEncoderOnBoard Encoder1(I_SLOT_1); 
-MeEncoderOnBoard Encoder2(I_SLOT_2);
-MeEncoderOnBoard Encoder3(I_SLOT_3);
-MeEncoderOnBoard Encoder4(I_SLOT_4); 
+MeEncoderOnBoard Encoder1(I_PORT_1); 
+MeEncoderOnBoard Encoder2(I_PORT_2);
+MeEncoderOnBoard Encoder3(I_PORT_3);
+MeEncoderOnBoard Encoder4(I_PORT_4); 
 
 
 /*****************************************************************************/
@@ -214,21 +219,28 @@ void setup ()
 
 void loop ()
 {
-  if( lineFollower8.readSensors() == I_ZERO_OUTPUT )
+  if(ultrasonic_7.distanceCm() > 10)
+  {
+    if( lineFollower8.readSensors() == I_ZERO_OUTPUT )
+    {
+      MoveRobot( I_STOP, I_ZERO_POWER, I_ZERO_POWER );
+    }
+    if ( lineFollower8.readSensors() == I_DOUBLE_OUTPUT )
+    {
+      MoveRobot( I_FORWARD, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
+    }
+    if ( lineFollower8.readSensors() == I_LEFT_OUTPUT )
+    {
+      MoveRobot( I_LEFT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
+    }
+    if ( lineFollower8.readSensors() == I_RIGHT_OUTPUT )
+    {
+      MoveRobot ( I_RIGHT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
+    }
+  }
+  else
   {
     MoveRobot( I_STOP, I_ZERO_POWER, I_ZERO_POWER );
-  }
-  if ( lineFollower8.readSensors() == I_DOUBLE_OUTPUT )
-  {
-    MoveRobot( I_FORWARD, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
-  }
-  if ( lineFollower8.readSensors() == I_LEFT_OUTPUT )
-  {
-    MoveRobot( I_LEFT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
-  }
-  if ( lineFollower8.readSensors() == I_RIGHT_OUTPUT )
-  {
-    MoveRobot ( I_RIGHT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
   }
   _loop();
 }

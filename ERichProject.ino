@@ -219,7 +219,7 @@ void setup ()
 
 void loop ()
 {
-  if(ultrasonic_7.distanceCm() > 10)
+  if(ultrasonic_7.distanceCm() > 20)
   {
     if( lineFollower8.readSensors() == I_ZERO_OUTPUT )
     {

@@ -68,9 +68,10 @@ int I_SLOT_4 = 4;
 /*****************************************************************************/
 // Moving Power
 /*****************************************************************************/
+//Constant is negative, so the robot drives forward
 
-const int I_MOVING_POWER_RIGHT = 50 / 100.0 * 255;
-const int I_MOVING_POWER_LEFT = 30 / 100.0 * 255;
+const int I_MOVING_POWER_RIGHT = (60 / 100.0 * 255) * I_NEGATIVE;
+const int I_MOVING_POWER_LEFT = (36 / 100.0 * 255) * I_NEGATIVE;
 const int I_ZERO_POWER = 0 / 100.0 * 255;
 
 
@@ -115,14 +116,14 @@ void MoveRobot( int a_iDirection, int a_iSpeedRight, int a_iSpeedLeft )
 
   if( a_iDirection == I_RIGHT ) 
   {
-    leftSpeed   = a_iSpeedLeft * I_NEGATIVE;
-    rightSpeed  = a_iSpeedRight;
+    leftSpeed   = a_iSpeedLeft;
+    rightSpeed  = a_iSpeedRight * I_NEGATIVE;
   }
 
   else if ( a_iDirection == I_LEFT ) 
   {
-    leftSpeed   = a_iSpeedLeft;
-    rightSpeed  = a_iSpeedRight * I_NEGATIVE;
+    leftSpeed   = a_iSpeedLeft * I_NEGATIVE;
+    rightSpeed  = a_iSpeedRight;
   }
 
   else if ( a_iDirection == I_STOP ) 
@@ -133,8 +134,8 @@ void MoveRobot( int a_iDirection, int a_iSpeedRight, int a_iSpeedLeft )
 
   else if ( a_iDirection == I_FORWARD )
   {
-    leftSpeed   = a_iSpeedLeft * I_NEGATIVE;
-    rightSpeed  = a_iSpeedRight * I_NEGATIVE;
+    leftSpeed   = a_iSpeedLeft;
+    rightSpeed  = a_iSpeedRight;
   }
 
   Encoder1.setTarPWM( rightSpeed );

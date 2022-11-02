@@ -74,9 +74,9 @@ int I_PORT_4 = 4;
 /*****************************************************************************/
 //Constant is negative, so the robot drives forward
 
-const int I_MOVING_POWER_RIGHT = (60 / 100.0 * 255) * I_NEGATIVE;
-const int I_MOVING_POWER_LEFT = (36 / 100.0 * 255) * I_NEGATIVE;
-const int I_ZERO_POWER = 0 / 100.0 * 255;
+const int I_OUTPUT_PWR_RIGHT = (60 / 100.0 * 255) * I_NEGATIVE;
+const int I_OUTPUT_PWR_LEFT = (36 / 100.0 * 255) * I_NEGATIVE;
+const int I_OUTPUT_PWR_ZERO = 0 / 100.0 * 255;
 
 
 /*****************************************************************************/
@@ -223,24 +223,24 @@ void loop ()
   {
     if( lineFollower8.readSensors() == I_ZERO_INPUT )
     {
-      MoveRobot( I_STOP, I_ZERO_POWER, I_ZERO_POWER );
+      MoveRobot( I_STOP, I_OUTPUT_PWR_ZERO, I_OUTPUT_PWR_ZERO );
     }
     if ( lineFollower8.readSensors() == I_DOUBLE_INPUT )
     {
-      MoveRobot( I_FORWARD, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
+      MoveRobot( I_FORWARD, I_OUTPUT_PWR_RIGHT, I_OUTPUT_PWR_LEFT );
     }
     if ( lineFollower8.readSensors() == I_LEFT_INPUT )
     {
-      MoveRobot( I_LEFT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
+      MoveRobot( I_LEFT, I_OUTPUT_PWR_RIGHT, I_OUTPUT_PWR_LEFT );
     }
     if ( lineFollower8.readSensors() == I_RIGHT_INPUT )
     {
-      MoveRobot ( I_RIGHT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
+      MoveRobot ( I_RIGHT, I_OUTPUT_PWR_RIGHT, I_OUTPUT_PWR_LEFT );
     }
   }
   else
   {
-    MoveRobot( I_STOP, I_ZERO_POWER, I_ZERO_POWER );
+    MoveRobot( I_STOP, I_OUTPUT_PWR_ZERO, I_OUTPUT_PWR_ZERO );
   }
   _loop();
 }

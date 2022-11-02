@@ -114,33 +114,33 @@ MeEncoderOnBoard Encoder4(I_PORT_4);
 // Funktion die Bewegungsrichtung und Geschwindigkeit berechnet
 // und dem Roboter �bergibt
 
-void MoveRobot( int a_iDirection, int a_iSpeedRight, int a_iSpeedLeft ) 
+void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft ) 
 {
   int leftSpeed   = I_ZERO;
   int rightSpeed  = I_ZERO;
 
   if( a_iDirection == I_RIGHT ) 
   {
-    leftSpeed   = a_iSpeedLeft;
-    rightSpeed  = a_iSpeedRight * I_NEGATIVE;
+    leftSpeed   = a_iPowerLeft;
+    rightSpeed  = a_iPowerRight * I_NEGATIVE;
   }
 
   else if ( a_iDirection == I_LEFT ) 
   {
-    leftSpeed   = a_iSpeedLeft * I_NEGATIVE;
-    rightSpeed  = a_iSpeedRight;
+    leftSpeed   = a_iPowerLeft * I_NEGATIVE;
+    rightSpeed  = a_iPowerRight;
   }
 
   else if ( a_iDirection == I_STOP ) 
   {
-    leftSpeed   = a_iSpeedLeft* I_ZERO;
-    rightSpeed  = a_iSpeedRight * I_ZERO;
+    leftSpeed   = a_iPowerLeft* I_ZERO;
+    rightSpeed  = a_iPowerRight * I_ZERO;
   }
 
   else if ( a_iDirection == I_FORWARD )
   {
-    leftSpeed   = a_iSpeedLeft;
-    rightSpeed  = a_iSpeedRight;
+    leftSpeed   = a_iPowerLeft;
+    rightSpeed  = a_iPowerRight;
   }
 
   Encoder1.setTarPWM( rightSpeed );

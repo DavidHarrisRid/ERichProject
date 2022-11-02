@@ -87,13 +87,13 @@ const int I_ONE_SEC = 1000;
 
 
 /*****************************************************************************/
-// Sensor Output
+// Sensor Input
 /*****************************************************************************/
 
-const uint8_t I_ZERO_OUTPUT = 3;
-const uint8_t I_LEFT_OUTPUT = 1;     
-const uint8_t I_RIGHT_OUTPUT = 2;    
-const uint8_t I_DOUBLE_OUTPUT = 0;
+const uint8_t I_ZERO_INPUT = 3;
+const uint8_t I_LEFT_INPUT = 1;     
+const uint8_t I_RIGHT_INPUT = 2;    
+const uint8_t I_DOUBLE_INPUT = 0;
 
 
 /*****************************************************************************/
@@ -221,19 +221,19 @@ void loop ()
 {
   if(ultrasonic_7.distanceCm() > 20)
   {
-    if( lineFollower8.readSensors() == I_ZERO_OUTPUT )
+    if( lineFollower8.readSensors() == I_ZERO_INPUT )
     {
       MoveRobot( I_STOP, I_ZERO_POWER, I_ZERO_POWER );
     }
-    if ( lineFollower8.readSensors() == I_DOUBLE_OUTPUT )
+    if ( lineFollower8.readSensors() == I_DOUBLE_INPUT )
     {
       MoveRobot( I_FORWARD, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
     }
-    if ( lineFollower8.readSensors() == I_LEFT_OUTPUT )
+    if ( lineFollower8.readSensors() == I_LEFT_INPUT )
     {
       MoveRobot( I_LEFT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
     }
-    if ( lineFollower8.readSensors() == I_RIGHT_OUTPUT )
+    if ( lineFollower8.readSensors() == I_RIGHT_INPUT )
     {
       MoveRobot ( I_RIGHT, I_MOVING_POWER_RIGHT, I_MOVING_POWER_LEFT );
     }

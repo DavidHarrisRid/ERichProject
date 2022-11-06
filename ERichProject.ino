@@ -111,6 +111,8 @@ MeEncoderOnBoard Encoder4(I_PORT_4);
 /*****************************************************************************/
 // Funktionen
 /*****************************************************************************/
+
+
 // Funktion die Bewegungsrichtung und Geschwindigkeit berechnet
 // und dem Roboter �bergibt
 
@@ -147,6 +149,9 @@ void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft )
   Encoder2.setTarPWM( leftSpeed );
 }
 
+// Function for delaying the next loop iteration
+// ??? wird nie aufgerufen ???
+
 void DelayLoop( float a_fSeconds )
 {
     if (a_fSeconds < F_NULL)
@@ -157,6 +162,9 @@ void DelayLoop( float a_fSeconds )
     while (millis() == endTime) loop();
 
 }
+
+// ???
+
 void _loop( void )
 {
     Encoder1.loop();

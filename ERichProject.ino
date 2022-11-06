@@ -149,7 +149,6 @@ void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft )
 
 void DelayLoop( float a_fSeconds )
 {
-    //if-Schleife
     if (a_fSeconds < F_NULL)
     {
       a_fSeconds = F_NULL;
@@ -168,6 +167,7 @@ void _loop( void )
 /*****************************************************************************/
 // Callbacks
 /*****************************************************************************/
+// Functions which give the correct current to the encoder motor
 
 void OnEncoder1ReadProc( void )
 {

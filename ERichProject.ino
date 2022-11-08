@@ -12,6 +12,8 @@
 *
 * History:
 *	05.09.22	MS	Created
+*
+* 08.11.22  Team7 Bug fix
 ******************************************************************************/
 
 #include <Arduino.h>
@@ -24,7 +26,7 @@
 
 
 /*****************************************************************************/
-// Konstanten
+// Konstant
 /*****************************************************************************/
 
 const int I_ZERO     = 0;
@@ -97,7 +99,7 @@ const uint8_t I_DOUBLE_INPUT = 0;
 
 
 /*****************************************************************************/
-// Methoden
+// Methods
 /*****************************************************************************/
 MeLineFollower lineFollower8( I_FOLLOWER_PORT ); 
 MeUltrasonicSensor ultrasonic_7( I_DISTANCE_PORT );
@@ -109,12 +111,9 @@ MeEncoderOnBoard Encoder4(I_PORT_4);
 
 
 /*****************************************************************************/
-// Funktionen
+// Function 
 /*****************************************************************************/
-
-
-// Funktion die Bewegungsrichtung und Geschwindigkeit berechnet
-// und dem Roboter �bergibt
+// Function for Moving Power in correlation to Direktion Argument
 
 void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft ) 
 {
@@ -149,8 +148,6 @@ void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft )
   Encoder2.setTarPWM( leftSpeed );
 }
 
-// Function for delaying the next loop iteration
-// ??? wird nie aufgerufen ???
 
 void DelayLoop( float a_fSeconds )
 {
@@ -163,7 +160,6 @@ void DelayLoop( float a_fSeconds )
 
 }
 
-// ???
 
 void _loop( void )
 {
@@ -173,7 +169,7 @@ void _loop( void )
 
 
 /*****************************************************************************/
-// Callbacks
+// Callbacks:
 /*****************************************************************************/
 // Functions which give the correct current to the encoder motor
 

@@ -15,6 +15,7 @@
 *
 * 08.11.22  Team7 Bug fix
 ******************************************************************************/
+// Code von Miso ab hier
 
 #include <Arduino.h>
 #include <Wire.h>
@@ -26,7 +27,7 @@
 
 
 /*****************************************************************************/
-// Konstant
+// Constants
 /*****************************************************************************/
 
 const int I_ZERO     = 0;
@@ -71,6 +72,10 @@ int I_PORT_2 = 2;
 int I_PORT_3 = 3;
 int I_PORT_4 = 4;
 
+// Code von Miso bis hier
+
+
+// Code von Anton ab hier
 /*****************************************************************************/
 // Moving Power
 /*****************************************************************************/
@@ -109,7 +114,10 @@ MeEncoderOnBoard Encoder2(I_PORT_2);
 MeEncoderOnBoard Encoder3(I_PORT_3);
 MeEncoderOnBoard Encoder4(I_PORT_4); 
 
+// Code von Anton bis hier
 
+
+// Code von Cem ab hier
 /*****************************************************************************/
 // Function 
 /*****************************************************************************/
@@ -148,6 +156,10 @@ void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft )
   Encoder2.setTarPWM( leftSpeed );
 }
 
+// Code von Cem bis hier
+
+
+// Code von Laszlo ab hier
 
 void DelayLoop( float a_fSeconds )
 {
@@ -197,7 +209,10 @@ void OnEncoder2ReadProc( void )
     }
 }
 
+// Code von Laszlo bis hier
 
+
+// Code von David ab hier
 /*****************************************************************************/
 // Setup:
 /*****************************************************************************/
@@ -219,7 +234,7 @@ void setup ()
 //Loop:
 /*****************************************************************************/
 //Repeats as long the Arduino is running
-//Output behaviour to Motors in correlation to the Sensor Input ist controlled
+//Output behaviour to Motors in correlation to the Sensor Input is controlled
 
 void loop ()
 {
@@ -248,5 +263,7 @@ void loop ()
   }
   _loop();
 }
+
+// Code von David bis hier
 /*****************************************************************************/
 /*****************************************************************************/

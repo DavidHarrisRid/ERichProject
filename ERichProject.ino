@@ -36,6 +36,7 @@ const int I_NEGATIVE = -1;
 const float F_NULL   = 0.0f;
 const float F_MILLIS = 1000.0f;
 
+// Constants for moving direction argument
 const int I_FORWARD = 0;
 const int I_STOP    = 3;
 const int I_LEFT    = 1;
@@ -45,6 +46,7 @@ const int I_RIGHT   = 2;
 /*****************************************************************************/
 // Maths
 /*****************************************************************************/
+
 const double D_PI        = 3.141592653589793;
 const double D_ANGLE     = 180.0;
 const double D_ANGLE_RAD = D_PI / D_ANGLE;
@@ -52,15 +54,16 @@ const double D_ANGLE_DEG = D_ANGLE / D_PI;
 
 
 /*****************************************************************************/
-// Line Follower
+// Line Follower Port
 /*****************************************************************************/
 
 const uint8_t I_FOLLOWER_PORT = 8;
 
 
 /*****************************************************************************/
-// Distance Sensor
+// Distance Sensor Port
 /*****************************************************************************/
+
 const uint8_t I_DISTANCE_PORT = 7;
 
 /*****************************************************************************/
@@ -104,8 +107,9 @@ const uint8_t I_DOUBLE_INPUT = 0;
 
 
 /*****************************************************************************/
-// Methods
+// Methods from icluded classes
 /*****************************************************************************/
+
 MeLineFollower lineFollower8( I_FOLLOWER_PORT ); 
 MeUltrasonicSensor ultrasonic_7( I_DISTANCE_PORT );
 
@@ -119,9 +123,9 @@ MeEncoderOnBoard Encoder4(I_PORT_4);
 
 // Code von Cem ab hier
 /*****************************************************************************/
-// Function 
+// Functions
 /*****************************************************************************/
-// Function for Moving Power in correlation to Direktion Argument
+// Function for robot movement in correlation to direction argument
 
 void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft ) 
 {
@@ -161,6 +165,17 @@ void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft )
 
 // Code von Laszlo ab hier
 
+void DelayLoop( float a_fSeconds )
+{
+    if (a_fSeconds < F_NULL) 
+    {
+      a_fSeconds = F_NULL;
+    }
+    long endTime = millis() + a_fSeconds * F_MILLIS;
+    while (millis() == endTime) loop();
+}
+
+// Function for giving feedback to the motors encoder
 void _loop( void )
 {
     Encoder1.loop();

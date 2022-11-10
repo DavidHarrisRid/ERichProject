@@ -44,16 +44,6 @@ const int I_RIGHT   = 2;
 
 
 /*****************************************************************************/
-// Maths
-/*****************************************************************************/
-
-const double D_PI        = 3.141592653589793;
-const double D_ANGLE     = 180.0;
-const double D_ANGLE_RAD = D_PI / D_ANGLE;
-const double D_ANGLE_DEG = D_ANGLE / D_PI;
-
-
-/*****************************************************************************/
 // Line Follower Port
 /*****************************************************************************/
 
@@ -87,13 +77,6 @@ int I_PORT_4 = 4;
 const int I_OUTPUT_PWR_RIGHT = (60 / 100.0 * 255) * I_NEGATIVE;
 const int I_OUTPUT_PWR_LEFT = (36 / 100.0 * 255) * I_NEGATIVE;
 const int I_OUTPUT_PWR_ZERO = 0 / 100.0 * 255;
-
-
-/*****************************************************************************/
-// Delay
-/*****************************************************************************/
-
-const int I_ONE_SEC = 1000; 
 
 
 /*****************************************************************************/
@@ -164,16 +147,6 @@ void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft )
 
 
 // Code von Laszlo ab hier
-
-void DelayLoop( float a_fSeconds )
-{
-    if (a_fSeconds < F_NULL) 
-    {
-      a_fSeconds = F_NULL;
-    }
-    long endTime = millis() + a_fSeconds * F_MILLIS;
-    while (millis() == endTime) loop();
-}
 
 // Function for giving feedback to the motors encoder
 void _loop( void )

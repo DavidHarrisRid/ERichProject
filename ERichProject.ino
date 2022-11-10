@@ -161,18 +161,6 @@ void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft )
 
 // Code von Laszlo ab hier
 
-void DelayLoop( float a_fSeconds )
-{
-    if (a_fSeconds < F_NULL)
-    {
-      a_fSeconds = F_NULL;
-    }
-    long endTime = millis() + a_fSeconds * F_MILLIS;
-    while (millis() == endTime) loop();
-
-}
-
-
 void _loop( void )
 {
     Encoder1.loop();

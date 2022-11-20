@@ -74,7 +74,7 @@ int I_PORT_4 = 4;
 /*****************************************************************************/
 // Moving Power
 /*****************************************************************************/
-//Constant is negative for Arduino to drive forward
+//Constant is negative for ERich to drive forward
 
 const int I_OUTPUT_PWR_RIGHT  = ( 60 / 100.0 * 255 ) * I_NEGATIVE;
 const int I_OUTPUT_PWR_LEFT   = ( 36 / 100.0 * 255 ) * I_NEGATIVE;
@@ -110,7 +110,7 @@ MeEncoderOnBoard Encoder4( I_PORT_4 );
 /*****************************************************************************/
 // Functions
 /*****************************************************************************/
-// Function for Arduino movement in correlation to direction argument
+// Function for ERich movement in correlation to direction argument
 
 void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft ) 
 {
@@ -195,7 +195,7 @@ void OnEncoder2ReadProc( void )
 /*****************************************************************************/
 // Setup:
 /*****************************************************************************/
-// Sets Parameters and Connections one time when Arduino is startet or reset
+// Sets Parameters and Connections one time when ERich is startet or reset
 
 void setup ()
 {
@@ -212,8 +212,8 @@ void setup ()
 /*****************************************************************************/
 //Loop:
 /*****************************************************************************/
-//Repeats as long Arduino is running
-//Direction of MoveRobot Funktion in correlation 
+//Repeats as long ERich is running
+//Direction of MoveRobot function in correlation 
 //to the Sensor Input is controlled
 
 void loop ()

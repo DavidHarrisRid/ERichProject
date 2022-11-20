@@ -36,7 +36,8 @@ const int I_NEGATIVE = -1;
 const float F_NULL   = 0.0f;
 const float F_MILLIS = 1000.0f;
 
-// Constants for moving direction argument
+// Constants Moving Direction
+
 const int I_FORWARD = 0;
 const int I_STOP    = 3;
 const int I_LEFT    = 1;
@@ -56,6 +57,7 @@ const uint8_t I_FOLLOWER_PORT = 8;
 
 const uint8_t I_DISTANCE_PORT = 7;
 
+
 /*****************************************************************************/
 // Encoder Board
 /*****************************************************************************/
@@ -72,34 +74,34 @@ int I_PORT_4 = 4;
 /*****************************************************************************/
 // Moving Power
 /*****************************************************************************/
-//Constant is negative, so the robot drives forward
+//Constant is negative for Arduino to drive forward
 
-const int I_OUTPUT_PWR_RIGHT = (60 / 100.0 * 255) * I_NEGATIVE;
-const int I_OUTPUT_PWR_LEFT = (36 / 100.0 * 255) * I_NEGATIVE;
-const int I_OUTPUT_PWR_ZERO = 0 / 100.0 * 255;
+const int I_OUTPUT_PWR_RIGHT  = ( 60 / 100.0 * 255 ) * I_NEGATIVE;
+const int I_OUTPUT_PWR_LEFT   = ( 36 / 100.0 * 255 ) * I_NEGATIVE;
+const int I_OUTPUT_PWR_ZERO   = 0 / 100.0 * 255;
 
 
 /*****************************************************************************/
 // Sensor Input
 /*****************************************************************************/
 
-const uint8_t I_ZERO_INPUT = 3;
-const uint8_t I_LEFT_INPUT = 1;     
-const uint8_t I_RIGHT_INPUT = 2;    
-const uint8_t I_DOUBLE_INPUT = 0;
+const uint8_t I_ZERO_INPUT    = 3;
+const uint8_t I_LEFT_INPUT    = 1;     
+const uint8_t I_RIGHT_INPUT   = 2;    
+const uint8_t I_DOUBLE_INPUT  = 0;
 
 
 /*****************************************************************************/
-// Methods from icluded classes
+// Methods from included classes
 /*****************************************************************************/
 
 MeLineFollower lineFollower8( I_FOLLOWER_PORT ); 
 MeUltrasonicSensor ultrasonic_7( I_DISTANCE_PORT );
 
-MeEncoderOnBoard Encoder1(I_PORT_1); 
-MeEncoderOnBoard Encoder2(I_PORT_2);
-MeEncoderOnBoard Encoder3(I_PORT_3);
-MeEncoderOnBoard Encoder4(I_PORT_4); 
+MeEncoderOnBoard Encoder1( I_PORT_1 ); 
+MeEncoderOnBoard Encoder2( I_PORT_2 );
+MeEncoderOnBoard Encoder3( I_PORT_3 );
+MeEncoderOnBoard Encoder4( I_PORT_4 ); 
 
 // Code von Anton bis hier
 
@@ -108,7 +110,7 @@ MeEncoderOnBoard Encoder4(I_PORT_4);
 /*****************************************************************************/
 // Functions
 /*****************************************************************************/
-// Function for robot movement in correlation to direction argument
+// Function for Arduino movement in correlation to direction argument
 
 void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft ) 
 {
@@ -149,6 +151,7 @@ void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft )
 // Code von Laszlo ab hier
 
 // Function for giving feedback to the motors encoder
+
 void _loop( void )
 {
     Encoder1.loop();
@@ -209,12 +212,13 @@ void setup ()
 /*****************************************************************************/
 //Loop:
 /*****************************************************************************/
-//Repeats as long the Arduino is running
-//Output behaviour to Motors in correlation to the Sensor Input is controlled
+//Repeats as long Arduino is running
+//Direction of MoveRobot Funktion in correlation 
+//to the Sensor Input is controlled
 
 void loop ()
 {
-  if(ultrasonic_7.distanceCm() > 20)
+  if( ultrasonic_7.distanceCm() > 20 )
   {
     if( lineFollower8.readSensors() == I_ZERO_INPUT )
     {

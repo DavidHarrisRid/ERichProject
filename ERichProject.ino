@@ -77,7 +77,7 @@ int I_PORT_4 = 4;
 //Constant is negative for ERich to drive forward
 
 const int I_OUTPUT_PWR_RIGHT  = ( 60 / 100.0 * 255 );
-const int I_OUTPUT_PWR_LEFT   = ( 60 / 100.0 * 255 );
+const int I_OUTPUT_PWR_LEFT   = ( 60 / 100.0 * 255 ) * I_NEGATIVE;
 const int I_OUTPUT_PWR_ZERO   = 0 / 100.0 * 255;
 
 

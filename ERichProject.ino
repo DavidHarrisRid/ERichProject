@@ -33,6 +33,8 @@
 const int I_ZERO     = 0;
 const int I_NEGATIVE = -1;
 
+const float F_MULTIPLIER = 1.4f;
+
 const float F_NULL   = 0.0f;
 const float F_MILLIS = 1000.0f;
 
@@ -76,8 +78,8 @@ int I_PORT_4 = 4;
 /*****************************************************************************/
 //Constant is negative for ERich to drive forward
 
-const int I_OUTPUT_PWR_RIGHT  = ( 60 / 100.0 * 255 );
-const int I_OUTPUT_PWR_LEFT   = ( 60 / 100.0 * 255 ) * I_NEGATIVE;
+const int I_OUTPUT_PWR_RIGHT  = ( 35 / 100.0 * 255 );
+const int I_OUTPUT_PWR_LEFT   = ( 35 / 100.0 * 255 ) * I_NEGATIVE;
 const int I_OUTPUT_PWR_ZERO   = 0 / 100.0 * 255;
 
 
@@ -112,33 +114,33 @@ MeEncoderOnBoard Encoder4( I_PORT_4 );
 /*****************************************************************************/
 // Function for ERich movement in correlation to direction argument
 
-void MoveRobot( int a_iDirection, int a_iPowerRight, int a_iPowerLeft ) 
+void MoveRobot( int a_iDirection) 
 {
-  int leftSpeed   = I_ZERO;
-  int rightSpeed  = I_ZERO;
+  int leftSpeed   = I_OUTPUT_PWR_ZERO;
+  int rightSpeed  = I_OUTPUT_PWR_ZERO;
 
   if( a_iDirection == I_RIGHT ) 
   {
-    leftSpeed   = a_iPowerLeft;
-    rightSpeed  = a_iPowerRight * I_NEGATIVE;
+    leftSpeed   = I_OUTPUT_PWR_LEFT * F_MULTIPLIER;
+    rightSpeed  = I_OUTPUT_PWR_RIGHT*I_NEGATIVE * F_MULTIPLIER;
   }
 
   else if ( a_iDirection == I_LEFT ) 
   {
-    leftSpeed   = a_iPowerLeft * I_NEGATIVE;
-    rightSpeed  = a_iPowerRight;
+    leftSpeed   = I_OUTPUT_PWR_LEFT*I_NEGATIVE * F_MULTIPLIER;
+    rightSpeed  = I_OUTPUT_PWR_RIGHT * F_MULTIPLIER;
   }
 
   else if ( a_iDirection == I_STOP ) 
   {
-    leftSpeed   = a_iPowerLeft* I_ZERO;
-    rightSpeed  = a_iPowerRight * I_ZERO;
+    leftSpeed   = I_OUTPUT_PWR_ZERO;
+    rightSpeed  = I_OUTPUT_PWR_ZERO;
   }
 
   else if ( a_iDirection == I_FORWARD )
   {
-    leftSpeed   = a_iPowerLeft;
-    rightSpeed  = a_iPowerRight;
+    leftSpeed   = I_OUTPUT_PWR_LEFT;
+    rightSpeed  = I_OUTPUT_PWR_RIGHT;
   }
 
   Encoder1.setTarPWM( rightSpeed );
@@ -222,24 +224,24 @@ void loop ()
   {
     if( lineFollower8.readSensors() == I_ZERO_INPUT )
     {
-      MoveRobot( I_STOP, I_OUTPUT_PWR_ZERO, I_OUTPUT_PWR_ZERO );
+      MoveRobot( I_STOP);
     }
     if ( lineFollower8.readSensors() == I_DOUBLE_INPUT )
     {
-      MoveRobot( I_FORWARD, I_OUTPUT_PWR_RIGHT, I_OUTPUT_PWR_LEFT );
+      MoveRobot( I_FORWARD);
     }
     if ( lineFollower8.readSensors() == I_LEFT_INPUT )
     {
-      MoveRobot( I_LEFT, I_OUTPUT_PWR_RIGHT, I_OUTPUT_PWR_LEFT );
+      MoveRobot( I_LEFT);
     }
     if ( lineFollower8.readSensors() == I_RIGHT_INPUT )
     {
-      MoveRobot ( I_RIGHT, I_OUTPUT_PWR_RIGHT, I_OUTPUT_PWR_LEFT );
+      MoveRobot ( I_RIGHT);
     }
   }
   else
   {
-    MoveRobot( I_STOP, I_OUTPUT_PWR_ZERO, I_OUTPUT_PWR_ZERO );
+    MoveRobot( I_STOP);
   }
   _loop();
 }
